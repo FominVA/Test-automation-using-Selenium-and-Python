@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 driver = webdriver.Chrome()
 
 # команда time.sleep устанавливает паузу в 5 секунд, чтобы мы успели увидеть, что происходит в браузере
-time.sleep(5)
+time.sleep(6)
 
 # Метод get сообщает браузеру, что нужно открыть сайт по указанной ссылке
 driver.get("https://suninjuly.github.io/text_input_task.html")
