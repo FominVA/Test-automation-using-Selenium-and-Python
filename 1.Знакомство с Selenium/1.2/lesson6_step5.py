@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-link = "https://suninjuly.github.io/find_link_text"
+link = "https://suninjuly.github.io/execute_script.html"
 
 try:
     browser = webdriver.Chrome()
