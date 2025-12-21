@@ -3,11 +3,15 @@ from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture
 def browser():
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
     yield driver
     driver.quit()
 
