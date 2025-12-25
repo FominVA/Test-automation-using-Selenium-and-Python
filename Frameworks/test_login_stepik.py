@@ -18,8 +18,8 @@ LOGIN_BUTTON = (By.CSS_SELECTOR, '.ember-view.navbar__auth.navbar__auth_login.st
 def login(self, browser, link):
     browser.get(f'{link}')
     WebDriverWait(browser, 20).until(EC.element_to_be_clickable(LOGIN_BUTTON)).click()
-    login = browser.find_element(By.CSS_SELECTOR, 'input#id_login_email').send_keys("VycheslavFA@yandex.ru")
-    password = browser.find_element(By.CSS_SELECTOR, 'input#id_login_password').send_keys("Slavikfomin123!")
+    login = browser.find_element(By.CSS_SELECTOR, 'input#id_login_email').send_keys("пфывафывап")
+    password = browser.find_element(By.CSS_SELECTOR, 'input#id_login_password').send_keys("пвапывап")
     entry_button = browser.find_element(By.CSS_SELECTOR, 'button.sign-form__btn.button_with-loader ').click()
 
 class TestFindElement:
