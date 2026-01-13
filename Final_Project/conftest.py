@@ -1,5 +1,5 @@
 from webbrowser import Chrome
-
+from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 from selenium import webdriver
 
@@ -19,7 +19,8 @@ def browser(request):
     browser = None
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
-        browser = webdriver.Chrome()
+        service = webdriver.ChromeService(ChromeDriverManager().install())
+        browser = webdriver.Chrome(service=service)
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox()
