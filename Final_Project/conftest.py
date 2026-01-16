@@ -2,6 +2,10 @@ from webbrowser import Chrome
 from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.drivers.firefox import GeckoDriver
+from webdriver_manager.firefox import GeckoDriverManager
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default='chrome',
@@ -19,10 +23,13 @@ def browser(request):
     browser = None
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
-        service = webdriver.ChromeService(ChromeDriverManager().install())
-        browser = webdriver.Chrome(service=service)
+        #options = webdriver.ChromeOptions()
+        #options.add_argument("--headless")
+        service = Service(executable_path=ChromeDriverManager().install())
+        browser = webdriver.Chrome(service=service, options=options)
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
+        service = Service(executable_path=GeckoDriverManager().install())
         browser = webdriver.Firefox()
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")

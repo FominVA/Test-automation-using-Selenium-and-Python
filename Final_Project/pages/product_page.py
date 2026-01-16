@@ -40,9 +40,11 @@ class ProductPage(BasePage):
         assert product_title in successful_adding_message, \
             "Message of successful adding product is not correct"
 
+    def should_be_success_message(self):
+        assert self.is_element_present(*ProductPageLocators.SUCCESS_MESSAGE)
+
     def should_not_be_success_message(self):
-        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
-            "Success message is presented, but should not be"
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE)
 
     def is_disappeared(self, how, what, timeout=4):
         try:

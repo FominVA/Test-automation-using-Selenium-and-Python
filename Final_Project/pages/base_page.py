@@ -7,7 +7,8 @@ from selenium.common.exceptions import NoAlertPresentException  # в начал�
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .locators import BasePageLocators
+from .locators import BasePageLocators, MainPageLocators
+
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):
@@ -56,3 +57,12 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK)
+
+
+    def go_to_basket(self):
+        basket_page = self.browser.find_element(*MainPageLocators.BASKET)
+        basket_page.click()
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
