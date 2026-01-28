@@ -14,7 +14,7 @@ try:
     last_name = browser.find_element(By.NAME, 'lastname')
     last_name.send_keys('Fomin')
     email = browser.find_element(By.NAME, 'email')
-    email.send_keys('FominVA@yandex.ru')
+    email.send_keys('')
 
     current_dir = os.path.abspath(os.path.dirname(__file__))  # получаем путь к директории текущего исполняемого файла
     file_path = os.path.join(current_dir, 'file.txt')  # добавляем к этому пути имя файла

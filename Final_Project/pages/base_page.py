@@ -44,7 +44,8 @@ class BasePage():
 
     def is_not_element_present(self, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#messages div:nth-child(1)')))
+            wait = WebDriverWait(self.browser, timeout)
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#messages div:nth-child(1)')))
         except TimeoutException:
             return True
 

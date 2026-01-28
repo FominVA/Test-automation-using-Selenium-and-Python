@@ -5,7 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.drivers.firefox import GeckoDriver
 from webdriver_manager.firefox import GeckoDriverManager
-
+from selenium.webdriver.chrome.options import Options
+from fake_useragent import UserAgent
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default='chrome',
@@ -19,20 +20,15 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="function")
 def browser(request):
-    browser_name = request.config.getoption("browser_name")
-    browser = None
-    if browser_name == "chrome":
-        print("\nstart chrome browser for test..")
-        #options = webdriver.ChromeOptions()
-        #options.add_argument("--headless")
-        service = Service(executable_path=ChromeDriverManager().install())
-        browser = webdriver.Chrome(service=service, options=options)
-    elif browser_name == "firefox":
-        print("\nstart firefox browser for test..")
-        service = Service(executable_path=GeckoDriverManager().install())
-        browser = webdriver.Firefox()
-    else:
-        raise pytest.UsageError("--browser_name should be chrome or firefox")
+    ua = UserAgent()
+    user_agent = ua.random
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument(f"user-agent={user_agent}")
+    service = Service(executable_path=ChromeDriverManager().install())
+    browser = webdriver.Chrome(service=service, options=options)
     yield browser
-    print("\nquit browser..")
     browser.quit()
